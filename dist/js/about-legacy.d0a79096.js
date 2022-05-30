@@ -1,0 +1,2 @@
+"use strict";(self["webpackChunkpoll_application"]=self["webpackChunkpoll_application"]||[]).push([[443],{5830:function(t,e,n){n.r(e),n.d(e,{default:function(){return c}});var l=function(){var t=this,e=t.$createElement;t._self._c;return t._m(0)},a=[function(){var t=this,e=t.$createElement,n=t._self._c||e;return n("div",{staticClass:"about"},[n("h1",[t._v("This is an about page")])])}],u=n(1001),i={},s=(0,u.Z)(i,l,a,!1,null,null,null),c=s.exports}}]);
+//# sourceMappingURL=about-legacy.d0a79096.js.map

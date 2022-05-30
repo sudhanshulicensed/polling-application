@@ -1,12 +1,23 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
+    <b-navbar toggleable="lg" type="dark" variant="info">
+      <b-navbar-brand href="#">Poll</b-navbar-brand>
+    </b-navbar>
+    <!-- <nav>
+      <router-link to="/">Home</router-link> <br>
       <router-link to="/about">About</router-link>
-    </nav>
+    </nav> -->
     <router-view/>
   </div>
 </template>
+
+<script>
+
+
+
+export default {
+}
+</script>
 
 <style>
 #app {
