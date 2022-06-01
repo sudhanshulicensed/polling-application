@@ -2,45 +2,85 @@
     <div>
        <div class="login-comp">
         <b-jumbotron header="SignUp"></b-jumbotron>
+        
         <b-container fluid>
-            <b-row class="my-1" v-for="type in types" :key="type">
+            <b-row class="my-1">
                 <b-col sm="3">
-                    <label :for="`type-${type}`"><code>{{ type }}</code>:</label>
+                    <label><code>Username</code>:</label>
                 </b-col>
                 <b-col sm="6">
-                    <b-form-input :id="`type-${type}`" :type="type"></b-form-input>
+                    <b-form-input v-model="username">{{ username }}</b-form-input>
+                </b-col>
+                <b-col sm="3">
+                    <label><code>Password</code>:</label>
+                </b-col>
+                <b-col sm="6">
+                    <b-form-input v-model="password">{{ password }}</b-form-input>
                 </b-col>
             </b-row>
-                <!-- <b-row class="my-1"> -->
-                    <b-col sm="6">
-                    <b-form-select v-model="selected" :options="options"></b-form-select>
-                    </b-col>
-                <!-- </b-row> -->
+            <b-row class="my-1">
+                <b-col sm="3">
+                <label><code>role:</code></label>
+                </b-col>
+                <b-col sm="6">
+                <b-form-select v-model="selected" :options="options"></b-form-select>
+                </b-col>
+            </b-row>
+            <b-row class="my-1">
+                <b-col sm="3"></b-col>
+               <b-col sm="6 d-flex justify-content-end">
+                   <b-button variant="info" @click="handleSignup ">SignUp</b-button>
+               </b-col>
+            </b-row>
         </b-container>
      </div>
 </div>
 </template>
 
 <script>
+import { mapActions } from "vuex"
 export default {
     name: "SignUpComponent",
     data() {
       return {
-        types: [
-          'text',
-          'password',
-        ],
+        info: null,
+        username: "",
+        password: "",
         selected: null,
         options: [
           { value: null, text: 'Role' },
-          { value: 'a', text: 'Admin' },
-          { value: 'b', text: 'Guest' },
-        ]
+          { value: 'admin', text: 'Admin' },
+          { value: 'guest', text: 'Guest' },
+        ],
       }
-    }
+    },
+    methods: {
+        ...mapActions([
+            'callSignup',
+        ]),
+        handleSignup(){
+            const payLoad = {
+                username : this.username,
+                password : this.password,
+                role : this.selected,
+            }
+            console.log(this.username, this.password, this.selected)
+            this.callSignup(payLoad);
+        }
+    },
+    // mounted(){
+    //     axios.get("https://secure-refuge-14993.herokuapp.com/add_user?username=admin&password=admin&role=admin")
+    //     .then(response => (this.info = response))
+    // }
 }
 </script>
 
 <style scoped>
+    lable{
+        margin-top: 0.5rem;
+    }
 
+    /* .btn-flex{
+        display: ;
+    } */
 </style>

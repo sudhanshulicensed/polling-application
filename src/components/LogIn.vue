@@ -10,6 +10,12 @@
                 <b-form-input :id="`type-${type}`" :type="type"></b-form-input>
             </b-col>
             </b-row>
+              <b-row class="my-1">
+                <b-col sm="3"></b-col>
+               <b-col sm="6 d-flex justify-content-end">
+                   <b-button variant="info">LogIn</b-button>
+               </b-col>
+            </b-row>
         </b-container>
     </div>
 </template>
@@ -20,7 +26,7 @@ export default {
     data() {
       return {
         types: [
-          'email',
+          'text',
           'password',
         ]
       }
