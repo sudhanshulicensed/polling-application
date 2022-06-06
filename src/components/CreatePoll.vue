@@ -20,7 +20,7 @@
                             <b-form-input v-model="item.option"></b-form-input>
                         </b-col>
                         <b-col sm="1">
-                            <b-button variant="danger" v-show="checkForDelete" @click="deleteOption(index)">Delete</b-button>
+                            <b-button variant="danger" v-if="options.length > 3" @click="deleteOption(index)">Delete</b-button>
                         </b-col>
                     </b-row>
                 </b-col>
@@ -28,7 +28,7 @@
             <b-row>
                 <b-col>
                     <b-row>
-                        <b-button variant="info" @click="handleCreatePoll">Submit</b-button>
+                        <b-button variant="info" @click="handleCreatePoll()">Submit</b-button>
                         <b-button variant="info" @click="addOption">Add Option</b-button>
                     </b-row>
                 </b-col>
@@ -63,7 +63,6 @@ export default {
                 title: this.title,
                 options: this.options,
             }
-            console.log(this.title);
             this.callCreatepoll(payLoad);
         },
         addOption(){

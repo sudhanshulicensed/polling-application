@@ -6,7 +6,6 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-
   },
   getters: {
   },
@@ -20,7 +19,9 @@ export default new Vuex.Store({
       const response = await axios.post(`https://secure-refuge-14993.herokuapp.com/login?username=${payLoad.username}&password=${payLoad.password}`);
     },
     async callCreatepoll({commit}, payLoad){
-      const response = await axios.post(`https://secure-refuge-14993.herokuapp.com/add_poll?title=${payLoad.title}%20polll&options=${payLoad.options[0].option}____${payLoad.options[1].option}____${payLoad.options[2].option}____${payLoad.options[3].option}`);
+      const response = await axios.post
+      // (`https://secure-refuge-14993.herokuapp.com/add_poll?title=${payLoad.title}%20polll&options=${payLoad.options[0].option}____${payLoad.options[1].option}____${payLoad.options[2].option}____${payLoad.options[3].option}`);
+      (`https://secure-refuge-14993.herokuapp.com/add_poll?title=${payLoad.title}%20polll&options=${payLoad.options[].join(_____)}`);
     }
   },
   modules: {
