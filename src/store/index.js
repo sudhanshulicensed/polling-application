@@ -14,8 +14,10 @@ export default new Vuex.Store({
   },
   actions: {
     async callSignup({commit}, payLoad){
-      
       const response = await axios.post(`https://secure-refuge-14993.herokuapp.com/add_user?username=${payLoad.username}&password=${payLoad.password}&role=${payLoad.role}`);
+    },
+    async callLogin({commit}, payLoad) {
+      const response = await axios.post(`https://secure-refuge-14993.herokuapp.com/login?username=${payLoad.username}&password=${payLoad.password}`);
     }
   },
   modules: {

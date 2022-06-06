@@ -2,35 +2,40 @@
     <div>
        <div class="login-comp">
         <b-jumbotron header="SignUp"></b-jumbotron>
-        
         <b-container fluid>
-            <b-row class="my-1">
-                <b-col sm="3">
-                    <label><code>Username</code>:</label>
-                </b-col>
+            <b-row sm="12" class="row-gap my-1 justify-content-center flex-column align-items-center">
                 <b-col sm="6">
-                    <b-form-input v-model="username">{{ username }}</b-form-input>
-                </b-col>
-                <b-col sm="3">
-                    <label><code>Password</code>:</label>
-                </b-col>
-                <b-col sm="6">
-                    <b-form-input v-model="password">{{ password }}</b-form-input>
-                </b-col>
-            </b-row>
-            <b-row class="my-1">
-                <b-col sm="3">
-                <label><code>role:</code></label>
-                </b-col>
-                <b-col sm="6">
-                <b-form-select v-model="selected" :options="options"></b-form-select>
+                    <b-row class="row-gap">
+                    <b-col sm="3">
+                      <label><code>Username</code>:</label>
+                    </b-col>
+                    <b-col sm="9">
+                        <b-form-input v-model="username">{{ username }}</b-form-input>
+                    </b-col>
+                </b-row>
+                <b-row class="row-gap" >
+                    <b-col sm="3">
+                        <label><code>Password</code>:</label>
+                    </b-col>
+                    <b-col sm="9">
+                        <b-form-input v-model="password">{{ password }}</b-form-input>
+                    </b-col>
+                </b-row>
+                <b-row class="row-gap">
+                    <b-col sm="3">
+                        <label><code>Role</code>:</label>
+                    </b-col>
+                    <b-col sm="9">
+                        <b-form-select v-model="selected" :options="options"></b-form-select>
+                    </b-col>
+                </b-row>
                 </b-col>
             </b-row>
             <b-row class="my-1">
                 <b-col sm="3"></b-col>
-               <b-col sm="6 d-flex justify-content-end">
-                   <b-button variant="info" @click="handleSignup ">SignUp</b-button>
-               </b-col>
+                <b-col sm="6 d-flex justify-content-end">
+                    <b-button variant="info" @click="handleSignup ">SignUp</b-button>
+                </b-col>
             </b-row>
         </b-container>
      </div>
@@ -68,16 +73,16 @@ export default {
             this.callSignup(payLoad);
         }
     },
-    // mounted(){
-    //     axios.get("https://secure-refuge-14993.herokuapp.com/add_user?username=admin&password=admin&role=admin")
-    //     .then(response => (this.info = response))
-    // }
 }
 </script>
 
 <style scoped>
     lable{
         margin-top: 0.5rem;
+    }
+
+    .row-gap{
+        margin-bottom: 10px;
     }
 
     /* .btn-flex{

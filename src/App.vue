@@ -1,13 +1,16 @@
 <template>
   <div id="app">
-    <b-navbar d-flex toggleable="lg" type="dark" variant="info">
+    <b-navbar class="spc-btw" d-flex justify-content-between type="dark" variant="info">
       <b-navbar-brand href="#">Poll</b-navbar-brand>
-      <router-link v-if="currentRoute === 'signup'" to="/login">
+      <!-- <div class="1"></div> -->
+      <div class="2">
+        <router-link v-if="currentRoute === 'signup'" to="/login">
         <b-button  variant="dark">Login</b-button>
       </router-link>
       <router-link v-if="currentRoute === 'login'" to="/signup">
         <b-button  variant="dark">SignUp</b-button>
       </router-link>
+      </div>
     </b-navbar>
     <router-view/>
       <!-- v-show="signup == getRouteSignup" -->
@@ -60,6 +63,10 @@ nav a {
 
 nav a.router-link-exact-active {
   color: #42b983;
+}
+
+.spc-btw{
+  justify-content: space-between !important;
 }
 
 
