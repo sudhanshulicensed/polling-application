@@ -2,18 +2,25 @@
   <div id="app">
     <b-navbar class="spc-btw" d-flex justify-content-between type="dark" variant="info">
       <b-navbar-brand href="#">Poll</b-navbar-brand>
-      <!-- <div class="1"></div> -->
       <div class="2">
         <router-link v-if="currentRoute === 'signup'" to="/login">
-        <b-button  variant="dark">Login</b-button>
-      </router-link>
-      <router-link v-if="currentRoute === 'login'" to="/signup">
-        <b-button  variant="dark">SignUp</b-button>
-      </router-link>
+          <b-button  variant="dark">Login</b-button>
+        </router-link>
+        <router-link v-if="currentRoute === 'login'" to="/signup">
+          <b-button  variant="dark">SignUp</b-button>
+        </router-link>
       </div>
+        <router-link to="/createPoll">
+          <b-button variant="light">Create</b-button>
+        </router-link>
+        <router-link to="/editPoll">
+          <b-button variant="light">Edit</b-button>
+        </router-link>
+        <router-link to="/viewPoll">
+          <b-button variant="light">View</b-button>
+        </router-link>
     </b-navbar>
     <router-view/>
-      <!-- v-show="signup == getRouteSignup" -->
   </div>
 </template>
 

@@ -6,13 +6,13 @@
             <b-row sm="12" class="row-gap my-1 justify-content-center flex-column align-items-center">
                 <b-col sm="6">
                     <b-row class="row-gap">
-                    <b-col sm="3">
-                      <label><code>Username</code>:</label>
-                    </b-col>
-                    <b-col sm="9">
-                        <b-form-input v-model="username">{{ username }}</b-form-input>
-                    </b-col>
-                </b-row>
+                        <b-col sm="3">
+                            <label><code>Username</code>:</label>
+                        </b-col>
+                        <b-col sm="9">
+                            <b-form-input v-model="username">{{ username }}</b-form-input>
+                        </b-col>
+                    </b-row>
                 <b-row class="row-gap" >
                     <b-col sm="3">
                         <label><code>Password</code>:</label>
