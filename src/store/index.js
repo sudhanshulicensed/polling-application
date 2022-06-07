@@ -19,9 +19,15 @@ export default new Vuex.Store({
       const response = await axios.post(`https://secure-refuge-14993.herokuapp.com/login?username=${payLoad.username}&password=${payLoad.password}`);
     },
     async callCreatepoll({commit}, payLoad){
+      let string = "";
+      for(let i = 0; i< payLoad.options.length-1; i++) {
+        string = string.concat(payLoad.options[i].option, "____");
+        console.log(string);
+      }
+      string = string.concat(payLoad.options[payLoad.options.length -1].option);
+      console.log(string);
       const response = await axios.post
-      // (`https://secure-refuge-14993.herokuapp.com/add_poll?title=${payLoad.title}%20polll&options=${payLoad.options[0].option}____${payLoad.options[1].option}____${payLoad.options[2].option}____${payLoad.options[3].option}`);
-      (`https://secure-refuge-14993.herokuapp.com/add_poll?title=${payLoad.title}%20polll&options=${payLoad.options[].join(_____)}`);
+      (`https://secure-refuge-14993.herokuapp.com/add_poll?title=${payLoad.title}%20polll&options=${string}`);
     }
   },
   modules: {

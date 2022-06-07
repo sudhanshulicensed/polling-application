@@ -1,6 +1,11 @@
 <template>
-    <div class="exmp">
-        <h1>Edit Page Working</h1>
+    <div class="editPoll">
+        <b-jumbotron header="Edit Poll"></b-jumbotron>
+        <b-card>
+            <b-container fluid>
+                
+            </b-container>
+        </b-card>
     </div>
 </template>
 

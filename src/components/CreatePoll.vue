@@ -63,6 +63,7 @@ export default {
                 title: this.title,
                 options: this.options,
             }
+            console.log(payLoad)
             this.callCreatepoll(payLoad);
         },
         addOption(){
