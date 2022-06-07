@@ -14,7 +14,7 @@
           <b-button variant="light">Create</b-button>
         </router-link>
         <router-link to="/editPoll">
-          <b-button variant="light">Edit</b-button>
+          <b-button variant="light" @click="handleEditPoll">Edit</b-button>
         </router-link>
         <router-link to="/viewPoll">
           <b-button variant="light">View</b-button>
@@ -26,7 +26,7 @@
 
 <script>
 
-
+import { mapActions } from 'vuex';
 
 export default {
   data(){
@@ -35,6 +35,12 @@ export default {
     }
   },
   methods: {
+    ...mapActions([
+            'callEditpoll',
+        ]),
+    handleEditPoll(){
+      this.callEditpoll();
+    }
   },
   computed: {
     currentRoute() {

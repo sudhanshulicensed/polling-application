@@ -6,10 +6,16 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    editResponse: null,
   },
   getters: {
+    editPollList: (state) => state.editResponse,
   },
   mutations: {
+    CALLEDITPOLL(state, response) {
+    state.editResponse = response;
+    console.log("From Index: ", response)
+    }
   },
   actions: {
     async callSignup({commit}, payLoad){
@@ -21,15 +27,18 @@ export default new Vuex.Store({
     async callCreatepoll({commit}, payLoad){
       let string = "";
       for(let i = 0; i< payLoad.options.length-1; i++) {
-        string = string.concat(payLoad.options[i].option, "____");
+        string = string.concat(payLoad.options[i].option, "____")
         console.log(string);
       }
       string = string.concat(payLoad.options[payLoad.options.length -1].option);
       console.log(string);
       const response = await axios.post
       (`https://secure-refuge-14993.herokuapp.com/add_poll?title=${payLoad.title}%20polll&options=${string}`);
+    },
+    async callEditpoll({commit}){
+      const response = await axios.get(`https://secure-refuge-14993.herokuapp.com/list_polls`);
+      console.log('40 called Call Edit Poll', response.data.data);
+      commit("CALLEDITPOLL", response.data.data)
     }
   },
-  modules: {
-  }
 })
