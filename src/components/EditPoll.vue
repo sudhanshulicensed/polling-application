@@ -5,7 +5,6 @@
             <b-container fluid>
                 <div class="pollHolder" v-for="(item, index) in editPollList" :key="index">
                     <div class="pollDetail" >
-                        <!-- {{ editPollList }} -->
                         <p class="title">Title: {{ item.title }}</p>
                         <p class="options">Options in Poll</p>
                         <ol>
@@ -13,14 +12,12 @@
                         </ol>
                     </div>
                     <div class="editPollButtons">
-                        <b-button variant="outline-primary">Edit Title</b-button>
+                        <b-button variant="outline-primary" @click="editTitle">Edit Title</b-button>
                         <b-button variant="outline-primary">New Option</b-button>
                         <b-button variant="outline-danger">Delete Option</b-button>
-                        <b-button variant="outline-danger">Delete Poll</b-button>
+                        <b-button variant="outline-danger" @click="deletePoll(index, editPollList)" >Delete Poll</b-button>
                     </div>
                 </div>
-                
-                
             </b-container>
         </b-card>
     </div>
@@ -41,6 +38,12 @@ export default {
         showResponse(){
             console.log("Edit Poll", this.editPollList);
         },
+        deletePoll(index, editPollList){
+            editPollList.splice(index, 1);
+        },
+        editTitle(){
+            console.log("Any")
+        }
     },
     mounted(){
         this.showResponse();
@@ -64,5 +67,9 @@ export default {
 
 li{
     text-align: start;
+}
+
+.pollHolder{
+    border: 1px solid black;
 }
 </style>
