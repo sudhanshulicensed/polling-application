@@ -37,8 +37,16 @@ export default new Vuex.Store({
     },
     async callEditpoll({commit}){
       const response = await axios.get(`https://secure-refuge-14993.herokuapp.com/list_polls`);
-      console.log('40 called Call Edit Poll', response.data.data);
       commit("CALLEDITPOLL", response.data.data)
+    },
+    async callDeletePoll({commit}, payLoad){
+      const response = await axios.post(`https://secure-refuge-14993.herokuapp.com/delete_poll?id=${payLoad}`);
+      return response;
+    },
+    async callEditTitle({commit}, payLoad){
+      console.log("payLoad", payLoad)
+      const response = await axios.post(`https://secure-refuge-14993.herokuapp.com/update_poll_title?id=577212fdd1bba33c17b5b64e&title=newtitle`);
+      console.log("callEditPoll", response)
     }
   },
 })
