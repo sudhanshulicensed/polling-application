@@ -14,7 +14,7 @@
           <b-button variant="light">Create</b-button>
         </router-link>
         <router-link to="/editPoll">
-          <b-button variant="light" @click="handleEditPoll">Edit</b-button>
+          <b-button variant="light">Edit</b-button>
         </router-link>
         <router-link to="/viewPoll">
           <b-button variant="light" @click="handleEditPoll">View</b-button>

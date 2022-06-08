@@ -12,7 +12,7 @@
         v-for="(item, index) in deletePollOption.options"
         :key="index"
       >
-        <b-form-radio name="some-radios" value="A">{{
+        <b-form-radio name="some-radios" v-model="selected" value="A">{{
           item.option
         }}</b-form-radio>
       </li>
@@ -25,11 +25,13 @@
       <!-- <p>{{ editPollTitle ? editPollTitle.title : null}}</p> -->
     </b-modal>
     <b-modal
-      v-model="showEditPollModal"
+      @ok="handleOk(text, editPollList)"
+      v-model="showAddOptionModal"
       title="Type what you want to add as an option in Poll"
     >
       <p class="my-4">Option:</p>
       <b-form-input v-model="text" placeholder="Option for Poll"></b-form-input>
+      {{ text }}
     </b-modal>
 
     <b-jumbotron header="Edit Poll"></b-jumbotron>
@@ -55,7 +57,7 @@
             >
             <b-button
               variant="outline-primary"
-              @click="newOption"
+              @click="handleNewOption(item)"
               v-b-modal.modal-1
               >New Option
             </b-button>
@@ -83,37 +85,49 @@ export default {
   name: "EditPoll",
   data() {
     return {
-      text: "",
+      selected: "",
       showDeletePollModal: false,
-      showEditPollModal: false,
+      showAddOptionModal: false,
       showEditTitleModal: false,
       editPollTitle: {},
       deletePollOption: {},
+      text: "",
+      objForNewOption: {},
     };
   },
   computed: {
     ...mapGetters([
         "editPollList",
-
     ]),
+  },
+  mounted(){
+    this.callMountRes();
+    this.callAddOptionRes();
   },
   methods: {
     ...mapActions([
             'callDeletePoll',
-            "callEditTitle"
+            "callEditTitle",
+            'callEditpoll',
+            'callAddOption',
         ]),
-    showResponse() {
-      console.log("Edit Poll", this.editPollList);
+    callMountRes(){
+        console.log("mounted");
+        this.callEditpoll();
+    },
+    callAddOptionRes(){
+        console.log("Here");
+        this.callAddOption();
     },
     async handleDeletePoll(item){
         const payLoad = {
             id: item._id,
         }
         const responseDelete = await this.callDeletePoll(payLoad.id);
+        this.callMountRes();
         console.log("parameter",item._id);
-        console.log("const payload", payLoad)
-        console.log("res", responseDelete)
-
+        console.log("const payload", payLoad);
+        console.log("res", responseDelete);
     },
     handleUpdateTitle(item) {
         this.editPollTitle = item;
@@ -123,19 +137,33 @@ export default {
         }
         console.log("Update Title", item)
         this.callEditTitle(payLoad);
-
     },
     deleteOption(item) {
       this.deletePollOption = item;
       this.showDeletePollModal = true;
     },
-    newOption() {
-
-        this.showEditPollModal = true;
+    handleNewOption(item) {
+        this.objForNewOption = item;
+        console.log(item);
+        console.log("in handleNewOption", this.objForNewOption);
+        this.showAddOptionModal = true;
     },
-  },
-  mounted() {
-    this.showResponse();
+    async handleOk(text, editPollList){
+        if(this.text != "") {
+            const payLoad = {
+                id: this.objForNewOption._id,
+                text: this.text,
+            }
+            console.log(editPollList)
+            console.log(text)
+            console.log("handleok,", payLoad)
+            const responseAddOption = await this.callAddOption(payLoad);
+            this.callAddOptionRes();
+            console.log(responseAddOption);
+        } else {
+            console.log("oop");
+        }
+    }
   },
 };
 </script>

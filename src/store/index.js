@@ -47,6 +47,12 @@ export default new Vuex.Store({
       console.log("payLoad", payLoad)
       const response = await axios.post(`https://secure-refuge-14993.herokuapp.com/update_poll_title?id=577212fdd1bba33c17b5b64e&title=newtitle`);
       console.log("callEditPoll", response)
+    },
+    async callAddOption({commit}, payLoad){
+      console.log("payload", payLoad);
+      const response = await axios.post(`https://secure-refuge-14993.herokuapp.com/add_new_option?id=${payLoad.id}&option_text=${payLoad.text}`);
+      console.log("callAddOption", response);
+      return response;
     }
   },
 })
