@@ -117,7 +117,8 @@ export default {
     },
     callAddOptionRes(){
         console.log("Here");
-        this.callAddOption();
+        this.callEditpoll();
+        // this.callAddOption();
     },
     async handleDeletePoll(item){
         const payLoad = {
@@ -160,6 +161,7 @@ export default {
             const responseAddOption = await this.callAddOption(payLoad);
             this.callAddOptionRes();
             console.log(responseAddOption);
+            this.text = "";
         } else {
             console.log("oop");
         }
