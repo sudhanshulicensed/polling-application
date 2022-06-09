@@ -14,7 +14,7 @@ export default new Vuex.Store({
   mutations: {
     CALLEDITPOLL(state, response) {
     state.editResponse = response;
-    console.log("From Index: ", response)
+    // console.log("From Index: ", response)
     }
   },
   actions: {
@@ -45,8 +45,9 @@ export default new Vuex.Store({
     },
     async callEditTitle({commit}, payLoad){
       console.log("payLoad", payLoad)
-      const response = await axios.post(`https://secure-refuge-14993.herokuapp.com/update_poll_title?id=577212fdd1bba33c17b5b64e&title=newtitle`);
+      const response = await axios.post(`https://secure-refuge-14993.herokuapp.com/update_poll_title?id=${payLoad.id}&title=${payLoad.title}`);
       console.log("callEditPoll", response)
+      return response;
     },
     async callAddOption({commit}, payLoad){
       console.log("payload", payLoad);

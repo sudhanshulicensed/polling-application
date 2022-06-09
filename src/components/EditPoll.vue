@@ -17,13 +17,21 @@
         }}</b-form-radio>
       </li>
     </b-modal>
-    <b-modal v-model="showEditTitleModal">
-        
+
+
+
+    <b-modal @ok="handleEditTitleOk(editTitleText, editPollList)" v-model="showEditTitleModal">
       <p>{{ editPollTitle.title }}</p>
-      <input type="text">
+      <input type="text" v-model="editTitleText">
+      {{ editTitleText }}
       <!-- Another Option -->
       <!-- <p>{{ editPollTitle ? editPollTitle.title : null}}</p> -->
     </b-modal>
+    
+    
+    
+    
+    
     <b-modal
       @ok="handleOk(text, editPollList)"
       v-model="showAddOptionModal"
@@ -92,6 +100,7 @@ export default {
       editPollTitle: {},
       deletePollOption: {},
       text: "",
+      editTitleText: "",
       objForNewOption: {},
     };
   },
@@ -103,6 +112,7 @@ export default {
   mounted(){
     this.callMountRes();
     this.callAddOptionRes();
+    this.callEditTitleRes();
   },
   methods: {
     ...mapActions([
@@ -120,6 +130,9 @@ export default {
         this.callEditpoll();
         // this.callAddOption();
     },
+    callEditTitleRes(){
+      this.callEditpoll();
+    },
     async handleDeletePoll(item){
         const payLoad = {
             id: item._id,
@@ -130,14 +143,20 @@ export default {
         console.log("const payload", payLoad);
         console.log("res", responseDelete);
     },
-    handleUpdateTitle(item) {
+    handleUpdateTitle(item){
+        // console.log(item);
         this.editPollTitle = item;
+        this.editPollTitleOk = item;
+        // console.log("handleUpdate Title", this.editPollTitle);
         this.showEditTitleModal = true;
+    },
+    async handleEditTitleOk(editTitleText) {
         const payLoad = {
-
+          title: editTitleText,
+          id: this.editPollTitle._id,
         }
-        console.log("Update Title", item)
-        this.callEditTitle(payLoad);
+        const responseEditTitle = await this.callEditTitle(payLoad);
+        this.callMountRes();
     },
     deleteOption(item) {
       this.deletePollOption = item;
