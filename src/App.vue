@@ -19,6 +19,9 @@
         <router-link to="/viewPoll">
           <b-button variant="light" @click="handleEditPoll">View</b-button>
         </router-link>
+        <router-link to="/takePoll">
+          <b-button variant="light">Take</b-button>
+        </router-link>
     </b-navbar>
     <router-view/>
   </div>

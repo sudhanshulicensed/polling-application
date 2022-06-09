@@ -54,6 +54,12 @@ export default new Vuex.Store({
       const response = await axios.post(`https://secure-refuge-14993.herokuapp.com/add_new_option?id=${payLoad.id}&option_text=${payLoad.text}`);
       console.log("callAddOption", response);
       return response;
+    },
+    async callDeleteOption({commit}, payLoad){
+      console.log('59 called ', payLoad)
+      const response = await axios.post(`https://secure-refuge-14993.herokuapp.com/delete_poll_option?id=${payLoad.id}&option_text=${payLoad.text}`)
+      // console.log("payLoad", payLoad);
+      console.log(response);
     }
   },
 })

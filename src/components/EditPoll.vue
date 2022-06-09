@@ -1,25 +1,21 @@
 <template>
   <div class="editPoll">
     <b-modal
-      v-for="(item, index) in deletePollOption"
-      :key="index"
+      @ok="handleDeleteOptionOk"
       v-model="showDeletePollModal"
       title="Select option to remove from poll"
     >
-      <p>Title: {{ deletePollOption.title }}</p>
+      <p>Title: {{ deletePollOption.title }} </p>
       <li
         id="no-style"
         v-for="(item, index) in deletePollOption.options"
         :key="index"
       >
-        <b-form-radio name="some-radios" v-model="selected" value="A">{{
+        <b-form-radio name="some-radios" @change="selectedRadio(item.option)" v-model="selected" :value="item.option">{{
           item.option
         }}</b-form-radio>
       </li>
     </b-modal>
-
-
-
     <b-modal @ok="handleEditTitleOk(editTitleText, editPollList)" v-model="showEditTitleModal">
       <p>{{ editPollTitle.title }}</p>
       <input type="text" v-model="editTitleText">
@@ -27,11 +23,6 @@
       <!-- Another Option -->
       <!-- <p>{{ editPollTitle ? editPollTitle.title : null}}</p> -->
     </b-modal>
-    
-    
-    
-    
-    
     <b-modal
       @ok="handleOk(text, editPollList)"
       v-model="showAddOptionModal"
@@ -41,7 +32,6 @@
       <b-form-input v-model="text" placeholder="Option for Poll"></b-form-input>
       {{ text }}
     </b-modal>
-
     <b-jumbotron header="Edit Poll"></b-jumbotron>
     <b-card class="card">
       <b-container class="container">
@@ -54,8 +44,8 @@
             <p class="title">Title: {{ item.title }}</p>
             <p class="options">Options in Poll</p>
             <ol>
-              <li v-for="(item, index) in item.options" :key="index">
-                {{ item.option }}
+              <li v-for="(item1, index) in item.options" :key="index">
+                {{ item1.option }}
               </li>
             </ol>
           </div>
@@ -100,6 +90,7 @@ export default {
       editPollTitle: {},
       deletePollOption: {},
       text: "",
+      deletePollOptionText: "",
       editTitleText: "",
       objForNewOption: {},
     };
@@ -120,18 +111,25 @@ export default {
             "callEditTitle",
             'callEditpoll',
             'callAddOption',
+            'callDeleteOption',
         ]),
     callMountRes(){
-        console.log("mounted");
         this.callEditpoll();
     },
     callAddOptionRes(){
-        console.log("Here");
         this.callEditpoll();
-        // this.callAddOption();
     },
     callEditTitleRes(){
       this.callEditpoll();
+    },
+    // callDeleteOPtionRes(){
+    //   this.callDeleteOption();
+    // },
+    selectedOption(event){
+      console.log(event, event.target.value, "blah");
+    },
+    selectedRadio(item){
+      this.deletePollOptionText = item;
     },
     async handleDeletePoll(item){
         const payLoad = {
@@ -139,15 +137,10 @@ export default {
         }
         const responseDelete = await this.callDeletePoll(payLoad.id);
         this.callMountRes();
-        console.log("parameter",item._id);
-        console.log("const payload", payLoad);
-        console.log("res", responseDelete);
     },
     handleUpdateTitle(item){
-        // console.log(item);
         this.editPollTitle = item;
         this.editPollTitleOk = item;
-        // console.log("handleUpdate Title", this.editPollTitle);
         this.showEditTitleModal = true;
     },
     async handleEditTitleOk(editTitleText) {
@@ -160,12 +153,20 @@ export default {
     },
     deleteOption(item) {
       this.deletePollOption = item;
+      console.log(this.deletePollOption)
       this.showDeletePollModal = true;
+    },
+    async handleDeleteOptionOk() {
+      const payLoad = {
+        id : this.deletePollOption._id,
+        text : this.deletePollOptionText,
+      }
+      console.log(payLoad)
+      const responsedelPollOptText = await this.callDeleteOption(payLoad);
+      this.callMountRes();
     },
     handleNewOption(item) {
         this.objForNewOption = item;
-        console.log(item);
-        console.log("in handleNewOption", this.objForNewOption);
         this.showAddOptionModal = true;
     },
     async handleOk(text, editPollList){
@@ -174,12 +175,8 @@ export default {
                 id: this.objForNewOption._id,
                 text: this.text,
             }
-            console.log(editPollList)
-            console.log(text)
-            console.log("handleok,", payLoad)
             const responseAddOption = await this.callAddOption(payLoad);
             this.callAddOptionRes();
-            console.log(responseAddOption);
             this.text = "";
         } else {
             console.log("oop");

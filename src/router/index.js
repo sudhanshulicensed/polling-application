@@ -6,6 +6,7 @@ import LogInPage from "../views/LogInPage.vue"
 import CreatePollPage from "../views/CreatePollPage.vue"
 import EditPollPage from "../views/EditPollPage.vue"
 import ViewPollPage from "../views/ViewPollPage.vue"
+import TakePollPage from "../views/TakePollPage.vue"
 
 Vue.use(VueRouter)
 
@@ -45,6 +46,11 @@ const routes = [
     path: '/viewPoll',
     name: 'viewPoll',
     component: ViewPollPage
+  },
+  {
+    path: '/takePoll',
+    name: 'takePoll',
+    component: TakePollPage
   }
 ]
 
