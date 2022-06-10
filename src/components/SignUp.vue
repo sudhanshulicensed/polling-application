@@ -43,6 +43,7 @@
 </template>
 
 <script>
+import router from '@/router'
 import { mapActions } from "vuex"
 export default {
     name: "SignUpComponent",
@@ -66,14 +67,18 @@ export default {
         ...mapActions([
             'callSignup',
         ]),
-        handleSignup(){
+        async handleSignup(){
             const payLoad = {
                 username : this.username,
                 password : this.password,
                 role : this.selected,
             }
             console.log(this.username, this.password, this.selected)
-            this.callSignup(payLoad);
+            const responseSignUp = await this.callSignup(payLoad);
+            console.log(responseSignUp);
+            if(responseSignUp.data.data.id != ""){
+                router.push('/login')
+            }
         }
     },
 }

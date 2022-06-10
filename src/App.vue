@@ -1,71 +1,16 @@
 <template>
   <div id="app">
-    <b-navbar class="spc-btw" d-flex justify-content-between type="dark" variant="info">
-      <b-navbar-brand href="#">Poll</b-navbar-brand>
-      <div class="main">
-        <router-link v-if="currentRoute === 'signup'" to="/login">
-          <b-button  variant="dark">Login</b-button>
-        </router-link>
-        <router-link v-if="currentRoute === 'login'" to="/signup">
-          <b-button  variant="dark">SignUp</b-button>
-        </router-link>
-      </div>
-      <div class="adminOptions" v-if="showAdmin_User">
-        <router-link to="/createPoll">
-          <b-button variant="light">Create</b-button>
-        </router-link>
-        <router-link to="/editPoll">
-          <b-button variant="light">Edit</b-button>
-        </router-link>
-        <router-link to="/viewPoll">
-          <b-button variant="light" @click="handleEditPoll">View</b-button>
-        </router-link>
-      </div>
-      <div class="guestOptions" v-if="showAdmin_User">
-        <router-link to="/takePoll">
-          <b-button variant="light" @click="handleTakeVotePoll">Take</b-button>
-        </router-link>
-      </div>
-    </b-navbar>
-    <router-view/>
+    <NavBar />
   </div>
 </template>
 
 <script>
 
-import { mapActions } from 'vuex';
+import NavBar from "./components/NavBar.vue"
 
 export default {
-  data(){
-    return {
-      showAdmin_User: false,
-    }
-  },
-  methods: {
-    ...mapActions([
-            'callEditpoll',
-            'callLogin'
-        ]),
-    handleEditPoll(){
-      this.callEditpoll();
-    },
-    handleTakeVotePoll(){
-      this.callEditpoll();
-    },
-    show(){
-      return this.showAdmin_User;
-    }
-  },
-  computed: {
-    currentRoute() {
-      let path = 'login'
-      if (this.$route.name === 'login') {
-        path = 'login'
-      } else {
-        path = 'signup'
-      }
-      return path
-    },
+  components: {
+    NavBar,
   }
 }
 </script>

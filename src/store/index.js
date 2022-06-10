@@ -8,9 +8,11 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     editResponse: null,
+    role: "",
   },
   getters: {
     editPollList: (state) => state.editResponse,
+    getRole: (state) => state.todoData,
   },
   mutations: {
     CALLEDITPOLL(state, response) {
@@ -20,14 +22,16 @@ export default new Vuex.Store({
   actions: {
     async callSignup({commit}, payLoad){
       const response = await axios.post(`https://secure-refuge-14993.herokuapp.com/add_user?username=${payLoad.username}&password=${payLoad.password}&role=${payLoad.role}`);
+      console.log(response);
+      return response;
     },
     async callLogin({commit}, payLoad) {
       const response = await axios.post(`https://secure-refuge-14993.herokuapp.com/login?username=${payLoad.username}&password=${payLoad.password}`);
-      console.log(response);
+      console.log("Response", response);
       var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmExZWYxMjlhMzE0NjAwMTUwYzE3NGYiLCJ1c2VybmFtZSI6Im1ha2U3NzcwIiwicm9sZSI6ImFkbWluIiwiX192IjowLCJpYXQiOjE2NTQ3ODI0MjAsImV4cCI6MTY1ODM4MjQyMH0.1K1dHWytd65DO6jbwlG4gFSLyIQpXma2fIczn5A6Ohw";
       var decode = jwt_decode(token);
-      console.log(decode)
-      return response;
+      console.log("Decode Value", decode)
+      return [response, decode];
     },
     async callCreatepoll({commit}, payLoad){
       let string = "";

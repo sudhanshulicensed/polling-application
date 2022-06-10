@@ -31,7 +31,8 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import router from '@/router'
+import {mapGetters, mapActions } from 'vuex'
 export default {
     name: "LoginComponent",
     data() {
@@ -43,17 +44,31 @@ export default {
         ]
       }
     },
+    computed: {
+      ...mapGetters([
+        'getRole',
+      ])
+    },
     methods: {
       ...mapActions([
         'callLogin'
       ]),
-      handleLogin(){
+      async handleLogin(){
         const payLoad = {
           username : this.username,
           password : this.password,
         }
         console.log(this.username, this.password)
-        this.callLogin(payLoad);
+        const responseLogin = await this.callLogin(payLoad);
+        console.log("Response Login", responseLogin);
+        console.log(localStorage)
+        localStorage.setItem('token', responseLogin[0].data.token);
+        localStorage.setItem('role', responseLogin[1].role)
+        if(responseLogin[1].role == "admin"){
+          this.$router.push('/createPoll')
+        } else if(responseLogin[1].role == "guest"){
+          this.$router.push('/viewPoll')
+        }
       }
     }
 }

@@ -10,6 +10,15 @@ import TakePollPage from "../views/TakePollPage.vue"
 
 Vue.use(VueRouter)
 
+// const checkLocal = localStorage;
+// console.log("Local", checkLocal.getItem('role'));
+
+
+// console.log(localStorage.getItem('role'));
+// console.log(localStorage.getItem('token'));
+
+
+
 const routes = [
   {
     path: '/',
@@ -59,5 +68,22 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
+
+// router.beforeEach((to, from, next) => {
+//   console.log(localStorage.getItem('token'));
+//   let token = localStorage.getItem('token');
+//   console.log(token,"token");
+//   if(!token) { 
+//     console.log(to, from)
+//     return({name: 'login'})
+//   }
+//   else {
+//     next();
+//   }
+  //  {   
+  // } else
+  // console.log(to);
+  // return false
+// })
 
 export default router
