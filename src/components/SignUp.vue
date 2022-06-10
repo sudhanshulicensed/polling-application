@@ -18,7 +18,7 @@
                         <label><code>Password</code>:</label>
                     </b-col>
                     <b-col sm="9">
-                        <b-form-input v-model="password">{{ password }}</b-form-input>
+                        <b-form-input :type="types[0]" v-model="password">{{ password }}</b-form-input>
                     </b-col>
                 </b-row>
                 <b-row class="row-gap">
@@ -51,6 +51,9 @@ export default {
         info: null,
         username: "",
         password: "",
+        types: [
+          'password',
+        ],
         selected: null,
         options: [
           { value: null, text: 'Role' },

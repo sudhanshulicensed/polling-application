@@ -122,12 +122,6 @@ export default {
     callEditTitleRes(){
       this.callEditpoll();
     },
-    // callDeleteOPtionRes(){
-    //   this.callDeleteOption();
-    // },
-    selectedOption(event){
-      console.log(event, event.target.value, "blah");
-    },
     selectedRadio(item){
       this.deletePollOptionText = item;
     },

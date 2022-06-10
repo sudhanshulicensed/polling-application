@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import jwt_decode from "jwt-decode";
 
 Vue.use(Vuex)
 
@@ -14,8 +15,7 @@ export default new Vuex.Store({
   mutations: {
     CALLEDITPOLL(state, response) {
     state.editResponse = response;
-    // console.log("From Index: ", response)
-    }
+    },
   },
   actions: {
     async callSignup({commit}, payLoad){
@@ -23,6 +23,11 @@ export default new Vuex.Store({
     },
     async callLogin({commit}, payLoad) {
       const response = await axios.post(`https://secure-refuge-14993.herokuapp.com/login?username=${payLoad.username}&password=${payLoad.password}`);
+      console.log(response);
+      var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmExZWYxMjlhMzE0NjAwMTUwYzE3NGYiLCJ1c2VybmFtZSI6Im1ha2U3NzcwIiwicm9sZSI6ImFkbWluIiwiX192IjowLCJpYXQiOjE2NTQ3ODI0MjAsImV4cCI6MTY1ODM4MjQyMH0.1K1dHWytd65DO6jbwlG4gFSLyIQpXma2fIczn5A6Ohw";
+      var decode = jwt_decode(token);
+      console.log(decode)
+      return response;
     },
     async callCreatepoll({commit}, payLoad){
       let string = "";
@@ -44,22 +49,19 @@ export default new Vuex.Store({
       return response;
     },
     async callEditTitle({commit}, payLoad){
-      console.log("payLoad", payLoad)
       const response = await axios.post(`https://secure-refuge-14993.herokuapp.com/update_poll_title?id=${payLoad.id}&title=${payLoad.title}`);
-      console.log("callEditPoll", response)
       return response;
     },
     async callAddOption({commit}, payLoad){
-      console.log("payload", payLoad);
       const response = await axios.post(`https://secure-refuge-14993.herokuapp.com/add_new_option?id=${payLoad.id}&option_text=${payLoad.text}`);
-      console.log("callAddOption", response);
       return response;
     },
     async callDeleteOption({commit}, payLoad){
-      console.log('59 called ', payLoad)
       const response = await axios.post(`https://secure-refuge-14993.herokuapp.com/delete_poll_option?id=${payLoad.id}&option_text=${payLoad.text}`)
-      // console.log("payLoad", payLoad);
-      console.log(response);
-    }
+    },
+    // async callTakeVote({commit}, payLoad){
+    //   const response = await axios.post(`https://secure-refuge-14993.herokuapp.com/do_vote?id=${payLoad.id}&option_text=${payLoad.text}`)
+    //   return response;
+    // }
   },
 })

@@ -51,7 +51,7 @@ const routes = [
     path: '/takePoll',
     name: 'takePoll',
     component: TakePollPage
-  }
+  },
 ]
 
 const router = new VueRouter({
