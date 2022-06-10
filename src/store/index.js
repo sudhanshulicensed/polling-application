@@ -28,7 +28,7 @@ export default new Vuex.Store({
     async callLogin({commit}, payLoad) {
       const response = await axios.post(`https://secure-refuge-14993.herokuapp.com/login?username=${payLoad.username}&password=${payLoad.password}`);
       console.log("Response", response);
-      var token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmExZWYxMjlhMzE0NjAwMTUwYzE3NGYiLCJ1c2VybmFtZSI6Im1ha2U3NzcwIiwicm9sZSI6ImFkbWluIiwiX192IjowLCJpYXQiOjE2NTQ3ODI0MjAsImV4cCI6MTY1ODM4MjQyMH0.1K1dHWytd65DO6jbwlG4gFSLyIQpXma2fIczn5A6Ohw";
+      var token = response.data.token;
       var decode = jwt_decode(token);
       console.log("Decode Value", decode)
       return [response, decode];
