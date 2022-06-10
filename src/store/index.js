@@ -29,9 +29,14 @@ export default new Vuex.Store({
       const response = await axios.post(`https://secure-refuge-14993.herokuapp.com/login?username=${payLoad.username}&password=${payLoad.password}`);
       console.log("Response", response);
       var token = response.data.token;
-      var decode = jwt_decode(token);
-      console.log("Decode Value", decode)
-      return [response, decode];
+      if(token) {
+        console.log(token)
+        var decode = jwt_decode(token);
+        console.log("Decode Value", decode)
+        return [response, decode];
+      } else {
+        console.log("User doesn't exist");
+      }
     },
     async callCreatepoll({commit}, payLoad){
       let string = "";

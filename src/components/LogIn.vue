@@ -68,6 +68,8 @@ export default {
           this.$router.push('/createPoll')
         } else if(responseLogin[1].role == "guest"){
           this.$router.push('/viewPoll')
+        } else {
+          console.log("user doesn't exist");
         }
       }
     }
