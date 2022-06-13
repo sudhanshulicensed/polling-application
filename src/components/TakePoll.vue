@@ -7,14 +7,14 @@
                     <div class="pollDetail" >
                         <p class="title">Title:{{ item.title }}</p>
                         <p class="options">Options in Poll</p>
-                        <li v-for="(voteOption, index) in item.options" :key="index"
+                        <li v-for="(voteOption, index1) in item.options" :key="index1"
                           id="no-style"
                         >
-                          <b-form-radio name="some-radios" @change="selectedRadio(voteOption, item)" v-model="ifOptionSelected" :value="voteOption.option">{{ voteOption.option }}</b-form-radio>
-                        </li>
-                            <button id="vote" :disabled="buttonState" @click="handleTakeVoteOk()">Press me to Vote</button>
+                          <b-form-radio name="some-radios" @change="selectedRadio(voteOption, item, index)" v-model="ifOptionSelected" :value="voteOption.option">{{ voteOption.option }}</b-form-radio>
+                        </li>{{item}}
+                            <button id="vote" :disabled="buttonState !== index" @click="handleTakeVoteOk()">Press me to Vote</button>
                     </div>
-                </div>
+                </div> 
             </b-container>
         </b-card>
     </div>
@@ -31,7 +31,7 @@ export default {
             voteOptionSelected: "",
             voteOptionId: "",
             ifOptionSelected: "",
-            buttonState: true,
+            buttonState: null,
         }
     },
     computed: {
@@ -46,10 +46,10 @@ export default {
       showList(){
         console.log(this.editPollList);
       },
-      selectedRadio(voteOption,whholeItem){
+      selectedRadio(voteOption,whholeItem,index){
         this.voteOptionSelected = voteOption.option;
         this.voteOptionId = whholeItem._id;
-        this.buttonState = false;
+        this.buttonState = index;
       },
       async handleTakeVoteOk(){
         if(this.ifOptionSelected != ""){

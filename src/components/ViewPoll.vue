@@ -3,7 +3,6 @@
         <b-jumbotron header="View Poll"></b-jumbotron>
         <b-card class="card">
             <b-container class="container">
-                <!-- {{editPollList}} -->
                 <div class="pollHolder" v-for="(item, index) in editPollList" :key="index">
                     <div class="pollDetail" >
                         <p class="title">Title: {{ item.title }}</p>
