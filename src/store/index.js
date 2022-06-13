@@ -5,6 +5,7 @@ import jwt_decode from "jwt-decode";
 
 Vue.use(Vuex)
 
+
 export default new Vuex.Store({
   state: {
     editResponse: null,
@@ -26,24 +27,19 @@ export default new Vuex.Store({
       } else {
         state.isLogin = false;
       }
-      console.log(value, state.isLogin);
       return state.isLogin;
     },
   },
   actions: {
     async callSignup({commit}, payLoad){
       const response = await axios.post(`https://secure-refuge-14993.herokuapp.com/add_user?username=${payLoad.username}&password=${payLoad.password}&role=${payLoad.role}`);
-      console.log(response);
       return response;
     },
     async callLogin({commit}, payLoad) {
       const response = await axios.post(`https://secure-refuge-14993.herokuapp.com/login?username=${payLoad.username}&password=${payLoad.password}`);
-      console.log("Response", response);
       var token = response.data.token;
       if(token) {
-        console.log(token)
         var decode = jwt_decode(token);
-        console.log("Decode Value", decode)
         return [response, decode];
       } else {
         console.log("User doesn't exist");
@@ -53,10 +49,8 @@ export default new Vuex.Store({
       let string = "";
       for(let i = 0; i< payLoad.options.length-1; i++) {
         string = string.concat(payLoad.options[i].option, "____")
-        console.log(string);
       }
       string = string.concat(payLoad.options[payLoad.options.length -1].option);
-      console.log(string);
       const response = await axios.post
       (`https://secure-refuge-14993.herokuapp.com/add_poll?title=${payLoad.title}%20polll&options=${string}`);
     },
@@ -79,9 +73,15 @@ export default new Vuex.Store({
     async callDeleteOption({commit}, payLoad){
       const response = await axios.post(`https://secure-refuge-14993.herokuapp.com/delete_poll_option?id=${payLoad.id}&option_text=${payLoad.text}`)
     },
-    // async callTakeVote({commit}, payLoad){
-    //   const response = await axios.post(`https://secure-refuge-14993.herokuapp.com/do_vote?id=${payLoad.id}&option_text=${payLoad.text}`)
-    //   return response;
-    // }
+    async callTakeVote({commit}, payLoad){
+      // const response = await axios.post(`https://secure-refuge-14993.herokuapp.com/do_vote?id=${payLoad.id}&option_text=${payLoad.text},`, "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNWEwMTgyYzU5NTI3ZmUwMDEyMzcwN2IyIiwiaWF0IjoxNTEwMDQ4NDY4LCJleHAiOjE1MTM2NDg0Njh9.DG93Hq-Fde9kNZbgnr34l2dZyeEYyJ0OfD_9yZK1JCQ")
+      console.log(localStorage)
+      console.log(localStorage.token);
+      const response = await axios.post(`https://secure-refuge-14993.herokuapp.com/do_vote?id=${payLoad.id}&option_text=${payLoad.text}`,{},{
+        headers: {'access_token': payLoad.access_token}
+      })
+      console.log(response);
+      return response;
+    }
   },
 })

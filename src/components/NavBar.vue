@@ -10,7 +10,7 @@
                 <b-button  variant="dark">SignUp</b-button>
                 </router-link>
             </div>
-            <div class="adminOptions" v-if="handleAdminUser === 'admin'">
+            <div class="adminOptions"  v-if="handleAdminUser === 'admin'">
                 <router-link to="/createPoll">
                 <b-button variant="light">Create</b-button>
                 </router-link>
@@ -101,11 +101,9 @@ export default {
       'isLogin'
     ]),
     currentRoute() {
-      console.log(this.$route.name)
       return this.$route.name;
     },
     handleAdminUser(){
-      console.log(this.isLogin);
       // this.loggenInDetail = localStorage.getItem('token');
       // console.log(localStorage)
       if(this.isLogin) {
@@ -148,5 +146,9 @@ export default {
 </script>
 
 <style scoped>
-
+.guestOptions,
+.adminOptions{
+  display: flex;
+  column-gap: 10px;
+}
 </style>

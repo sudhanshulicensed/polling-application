@@ -3,12 +3,13 @@
         <b-jumbotron header="View Poll"></b-jumbotron>
         <b-card class="card">
             <b-container class="container">
+                <!-- {{editPollList}} -->
                 <div class="pollHolder" v-for="(item, index) in editPollList" :key="index">
                     <div class="pollDetail" >
                         <p class="title">Title: {{ item.title }}</p>
                         <p class="options">Options in Poll</p>
                         <ol>
-                            <li v-for="(item, index) in item.options" :key="index">{{ item.option }}</li>
+                            <li v-for="(item, index) in item.options" :key="index">{{ item.option }} Vote: {{ item.vote }}</li>
                         </ol>
                     </div>
                 </div>
@@ -18,14 +19,23 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 export default {
     name: "ViewPoll",
+    methods: {
+        ...mapActions([
+        'callEditpoll'
+    ])
+    },
+    mounted(){
+        this.callEditpoll();
+    },
     computed: {
         ...mapGetters([
             'editPollList'
         ]),
     },
+    
 }
 </script>
 <style scoped>

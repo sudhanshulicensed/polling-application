@@ -10,14 +10,6 @@ import TakePollPage from "../views/TakePollPage.vue"
 import store from '../store'
 Vue.use(VueRouter)
 
-// const checkLocal = localStorage;
-// console.log("Local", checkLocal.getItem('role'));
-
-
-// console.log(localStorage.getItem('role'));
-// console.log(localStorage.getItem('token'));
-
-
 
 const routes = [
   {
@@ -70,22 +62,14 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  //   console.log(localStorage.getItem('token'));
-  console.log(store);
   let isAuthenticated = localStorage.getItem('token');
   store.commit("updateLogin", isAuthenticated);
-  console.log(isAuthenticated,"token");
   if(!isAuthenticated && !(to.path === '/login' || to.path === '/signup')) {
-     
     next('/login')
   }
   else {
     next();
   }
-  //  {   
-  // } else
-  // console.log(to);
-  // return false
 })
 
 export default router

@@ -12,7 +12,7 @@
                         >
                           <b-form-radio name="some-radios" @change="selectedRadio(voteOption, item)" v-model="ifOptionSelected" :value="voteOption.option">{{ voteOption.option }}</b-form-radio>
                         </li>
-                            <button id="vote" :disabled="buttonState" @click="handleTakeVoteOk">Press me to Vote</button>
+                            <button id="vote" :disabled="buttonState" @click="handleTakeVoteOk()">Press me to Vote</button>
                     </div>
                 </div>
             </b-container>
@@ -56,11 +56,13 @@ export default {
             const payLoad = {
             id : this.voteOptionId,
             text : this.voteOptionSelected,
+                        access_token: localStorage.token
         }
             const responseTookVote = await this.callTakeVote(payLoad);
+            console.log(responseTookVote);
+        }
         }
       }
-    },
 }
 </script>
 

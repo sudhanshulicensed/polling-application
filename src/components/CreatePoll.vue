@@ -27,9 +27,13 @@
             </b-row>
             <b-row>
                 <b-col>
-                    <b-row>
-                        <b-button variant="info" @click="handleCreatePoll()">Submit</b-button>
-                        <b-button variant="info" @click="addOption">Add Option</b-button>
+                    <b-row class="flex">
+                        <b-col sm="2">
+                        <b-button class="align" variant="info" @click="handleCreatePoll()">Submit</b-button>
+                        </b-col>
+                        <b-col sm="3">
+                            <b-button class="align" variant="info" @click="addOption">Add Option</b-button>
+                        </b-col>
                     </b-row>
                 </b-col>
             </b-row>
@@ -81,5 +85,14 @@ export default {
 <style scoped>
     .row-gap{
         margin-bottom: 10px;
+    }
+
+    .align{
+        display: flex;
+    }
+
+    .flex{
+        display: flex;
+        column-gap: 10px;
     }
 </style>
