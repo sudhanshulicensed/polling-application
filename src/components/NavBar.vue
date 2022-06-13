@@ -31,7 +31,7 @@
                 <router-link to="/takePoll">
                 <b-button variant="light" @click="handleTakeVotePoll">Take</b-button>
                 </router-link>
-                <router-link to="/logout" v-if="loggenInDetail">
+                <router-link to="/logout" v-if="isLogin">
                 <b-button  variant="dark" @click="handleLogOut">Log Out</b-button>
                 </router-link>
             </div>
