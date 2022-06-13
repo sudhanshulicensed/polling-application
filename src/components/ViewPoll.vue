@@ -36,7 +36,6 @@ export default {
     justify-content: flex-start;
 }
 
-
 li{
     text-align: start;
 }

@@ -9,6 +9,7 @@ export default new Vuex.Store({
   state: {
     editResponse: null,
     role: "",
+    isLogin: false,
   },
   getters: {
     editPollList: (state) => state.editResponse,
@@ -17,6 +18,16 @@ export default new Vuex.Store({
   mutations: {
     CALLEDITPOLL(state, response) {
     state.editResponse = response;
+    },
+    updateLogin(state, value){
+      if(value){
+        
+        state.isLogin = true;
+      } else {
+        state.isLogin = false;
+      }
+      console.log(value, state.isLogin);
+      return state.isLogin;
     },
   },
   actions: {

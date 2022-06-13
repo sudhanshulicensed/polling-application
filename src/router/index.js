@@ -7,7 +7,7 @@ import CreatePollPage from "../views/CreatePollPage.vue"
 import EditPollPage from "../views/EditPollPage.vue"
 import ViewPollPage from "../views/ViewPollPage.vue"
 import TakePollPage from "../views/TakePollPage.vue"
-
+import store from '../store'
 Vue.use(VueRouter)
 
 // const checkLocal = localStorage;
@@ -70,10 +70,13 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-//   console.log(localStorage.getItem('token'));
+  //   console.log(localStorage.getItem('token'));
+  console.log(store);
   let isAuthenticated = localStorage.getItem('token');
+  store.commit("updateLogin", isAuthenticated);
   console.log(isAuthenticated,"token");
-  if(!isAuthenticated && !(to.path === '/login' || to.path === '/signup')) { 
+  if(!isAuthenticated && !(to.path === '/login' || to.path === '/signup')) {
+     
     next('/login')
   }
   else {
